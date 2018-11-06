@@ -1,7 +1,7 @@
 # SDL-Menu
 Mini Library for SDL Game in C
 
-# Use
+## Use
 
 Compilation
 
