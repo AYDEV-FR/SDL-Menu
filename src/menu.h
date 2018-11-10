@@ -81,6 +81,8 @@ SDL_Surface *initText(char text[], int fontSize, int hexColorFont, int params){
   font = TTF_OpenFont(fontName, fontSize);
   TTF_SetFontStyle(font, params);
   textSurface = TTF_RenderText_Blended(font, text, colorConverter(hexColorFont));
+  TTF_CloseFont(font);
+
   return textSurface;
 }
 
@@ -102,10 +104,10 @@ void displayParagraph(SDL_Surface *surface, SDL_Surface **textSurface, int x, in
 }
 
 void displayParagraphCenter(SDL_Surface *surface, SDL_Surface **textSurface, int y, int nbLine){
-  for(int i = 0; i < nbLine; i++){
-      displayText(surface, textSurface[i],
-        (surface->w)/2-(textSurface[i]->w)/2,
-        y + textSurface[i]->h * i);
+  for(int i = -1; i < nbLine - 1; i++){
+      displayText(surface, textSurface[i+1],
+        (surface->w)/2-(textSurface[i+1]->w)/2,
+        y + textSurface[i+1]->h * i);
   }
 }
 
@@ -196,8 +198,9 @@ int waitEvent(Button menu[], SDL_Surface *screen, int nbButton){
       case SDL_MOUSEBUTTONUP:
         for(int i=0; i < nbButton; i++){
           if (clickButton(menu[i], event)){
-                (*menu[i].function)(screen);
-                break;
+              //for(int j=0; j < nbButton; j++) SDL_FreeSurface(menu[j].surface);
+              (*menu[i].function)(screen);
+              break;
           }
         }
     }
