@@ -15,7 +15,7 @@ void hello(){
 void main(){
   SDL_Surface *screen = NULL;
   SDL_Init(SDL_INIT_VIDEO);
-  screen = SDL_SetVideoMode(800, 600, 32, SDL_SWSURFACE);
+  screen = SDL_SetVideoMode(800, 700, 32, SDL_SWSURFACE);
   SDL_FillRect(screen, NULL, SDL_MapRGB(screen->format, 255, 255, 255));
 
   SDL_Flip(screen);
